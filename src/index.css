@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tiptap{
+    height: 200px !important;
+    width: 500px;
+    border: 2px solid black !important;
+}
