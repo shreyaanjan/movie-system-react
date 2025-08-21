@@ -1,17 +1,25 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { useRef } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 
-const AddMovie = () => {
+const EditMovie = () => {
     const [input, setInput] = useState({ title: "", url: "", genre: "" })
     const [show, setShow] = useState(false)
     const [desc, setDesc] = useState(null)
     const navigate = useNavigate();
-
+    const { id } = useParams()
     const editorRef = useRef();
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            let { data } = await axios.get(`http://localhost:9000/movies/${id}`)
+            setInput(data)
+        }
+        fetchData()
+    }, [id])
 
     const handleSave = () => {
         const htmlValue = editorRef.current.getInstance().getHTML();
@@ -23,27 +31,26 @@ const AddMovie = () => {
         setInput({ ...input, [e.target.id]: e.target.value })
     };
 
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault()
 
-        const addMovie = async () => {
-            const value = { ...input, desc, id: Date.now().toString()}
-            await axios.post("http://localhost:9000/movies", value)
+        const editMovie = async () => {
+            const value = { ...input, desc }
+            await axios.put(`http://localhost:9000/movies/${id}`, value)
         }
 
-        addMovie()
+        editMovie()
         navigate("/display-movie")
     };
-
     return (
-        <div className="bg-[#0F172A] add-movie-sect h-screen flex justify-center items-center">
+        <div className="bg-[#0F172A] add-movie-sect min-h-screen flex justify-center items-center">
             {
                 !show ?
                     <div className="w-full lg:w-1/2 flex item-center justify-center">
                         <div className="w-full bg-white rounded-md max-w-md p-8">
                             <div className="container mx-auto">
-                                <h2 className="mb-5 text-3xl font-semibold text-[#E27614]">Add A Movie</h2>
-                                <form onSubmit={handleSubmit}>
+                                <h2 className="mb-5 text-3xl font-semibold text-[#E27614]">Edit Movie</h2>
+                                <form onSubmit={handleUpdate}>
                                     <div className="mb-5">
                                         <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900">Title</label>
                                         <input type="text" value={input.title} onChange={handleChange} id="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
@@ -71,11 +78,11 @@ const AddMovie = () => {
                                     </div>
                                     <div className="flex items-center justify-center gap-5">
                                         <div>
-                                            <button type="button" onClick={() => setShow(!show)} className="text-white py-3 px-5 form-btn font-medium text-sm  items-center justify-center">Add Description</button>
+                                            <button type="button" onClick={() => setShow(!show)} className="text-white py-3 px-5 form-btn font-medium text-sm  items-center justify-center">Edit Description</button>
                                         </div>
                                         <div>
                                             <button type="submit" className="text-white py-3 px-5 form-btn font-medium text-sm items-center justify-center">
-                                                Submit
+                                                Update
                                             </button>
                                         </div>
                                     </div>
@@ -92,6 +99,7 @@ const AddMovie = () => {
                                 height="400px"
                                 initialEditType="wysiwyg"
                                 useCommandShortcut={true}
+                                initialValue={input.desc}
                             />
                             <button type="button" onClick={handleSave} className="mt-3 px-5 py-3 text-white home-btn">
                                 Save Content
@@ -103,4 +111,4 @@ const AddMovie = () => {
     )
 }
 
-export default AddMovie
+export default EditMovie

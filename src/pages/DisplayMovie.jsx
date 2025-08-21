@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const DisplayMovie = () => {
     const [movies, setMovies] = useState([])
-
+    const navigate = useNavigate()
+    
     useEffect(() => {
         fetchMovie()
     }, [])
@@ -14,11 +16,16 @@ const DisplayMovie = () => {
         setMovies(data)
     }
 
+    const handleDelete = async (id) => {
+        await axios.delete(`http://localhost:9000/movies/${id}`)
+        fetchMovie()
+    }
+
     return (
-        <div className="container mx-auto py-10">
+        <div className="container mx-auto py-28">
             <div className="relative overflow-x-auto">
                 <table className="w-full text-sm text-left rtl:text-right">
-                    <thead className="text-xs text-gray-700 uppercase bg-blue-400">
+                    <thead className="text-xs text-white uppercase bg-[#0F172A]">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 Number
@@ -49,7 +56,7 @@ const DisplayMovie = () => {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="w-32 h-24 overflow-hidden">
-                                            <img src={movie.url} alt="" className="object-cover h-full"/>
+                                            <img src={movie.url} alt="" className="object-cover h-full" />
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
@@ -57,9 +64,12 @@ const DisplayMovie = () => {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex gap-4">
-                                            <button className="border py-2 px-7">Edit</button>
-                                            <button className="border py-2 px-7">Delete</button>
-                                            <button className="border py-2 px-7">View More</button>
+                                            <button onClick={() => navigate(`/edit-movie/${movie.id}`)} className="border py-2 px-7">Edit</button>
+                                            <button onClick={() => handleDelete(movie.id)} className="border py-2 px-7">Delete</button>
+                                            <button onClick={() => {
+                                                navigate(`/description/${movie.id}`)
+                                            }
+                                            } className="border py-2 px-7">View More</button>
                                         </div>
                                     </td>
                                 </tr>
