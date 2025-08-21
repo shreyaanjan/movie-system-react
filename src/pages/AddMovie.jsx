@@ -37,47 +37,56 @@ const AddMovie = () => {
     }
 
     return (
-        <div className="py-5">
+        <div className="bg-[#0F172A] add-movie-sect min-h-screen flex justify-center items-center">
             {
                 !show ?
-                <div className="flex justify-center items-center h-[80vh] ">
-                    <form className="max-w-sm w-[500px] mx-auto" onSubmit={handleSubmit}>
-                        <div className="mb-5">
-                            <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900">Title</label>
-                            <input type="text" onChange={handleChange} id="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                    <div className="w-full lg:w-1/2 flex item-center justify-center">
+                        <div className="w-full bg-white rounded-md max-w-md p-8">
+                            <div className="container mx-auto">
+                                <h2 className="mb-5 text-3xl font-semibold text-[#E27614]">Add A Movie</h2>
+                                <form onSubmit={handleSubmit}>
+                                    <div className="mb-5">
+                                        <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900">Title</label>
+                                        <input type="text" onChange={handleChange} id="title" className="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                    </div>
+                                    <div className="mb-5">
+                                        <label htmlFor="url" className="block mb-2 text-sm font-medium text-gray-900">Image URL</label>
+                                        <input type="text" onChange={handleChange} id="url" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                        {input.url && (
+                                            <div className="w-32 pt-5">
+                                                <img src={input.url} alt="movie" />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="mb-5">
+                                        <label htmlFor="genre" className="block mb-2 text-sm font-medium text-gray-900">Genre</label>
+                                        <select id="genre" onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                            <option value="">Choose a Genre</option>
+                                            <option value="Action">Action</option>
+                                            <option value="Romantic">Romantic</option>
+                                            <option value="Comedy">Comedy</option>
+                                            <option value="Drama">Drama</option>
+                                            <option value="Thriller">Thriller</option>
+                                            <option value="Science Fiction">Science Fiction</option>
+                                        </select>
+                                    </div>
+                                    <div className="flex items-center justify-center gap-5">
+                                        <div>
+                                            <button type="button" onClick={() => setShow(!show)} className="text-white py-3 px-5 form-btn font-medium text-sm  items-center justify-center">Add Description</button>
+                                        </div>
+                                        <div>
+                                            <button type="submit" className="text-white py-3 px-5 form-btn font-medium text-sm items-center justify-center">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div className="mb-5">
-                            <label htmlFor="url" className="block mb-2 text-sm font-medium text-gray-900">Image URL</label>
-                            <input type="text" onChange={handleChange} id="url" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                            {input.url && (
-                                <div className="w-32 pt-5">
-                                    <img src={input.url} alt="" />
-                                </div>
-                            )}
-                        </div>
-                        <div className="mb-5">
-                            <label htmlFor="genre" className="block mb-2 text-sm font-medium text-gray-900">Genre</label>
-                            <select id="genre" onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                <option value="">Choose a Genre</option>
-                                <option value="Action">Action</option>
-                                <option value="Romantic">Romantic</option>
-                                <option value="Comedy">Comedy</option>
-                                <option value="Drama">Drama</option>
-                                <option value="Thriller">Thriller</option>
-                                <option value="Science Fiction">Science Fiction</option>
-                            </select>
-                        </div>
+                    </div>
+                    :
+                    <div className="min-h-screen flex justify-center items-center">
                         <div>
-                            <button type="button" onClick={() => setShow(!show)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add Description</button>
-
-                        </div>
-                        <button type="submit" className="text-white mt-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                            Submit
-                        </button>
-                    </form> 
-                </div> :
-                    <div className="flex justify-center items-center h-[80vh]">
-                        <div className="w-5/12 ">
                             <Editor
                                 ref={editorRef}
                                 previewStyle="vertical"
@@ -85,15 +94,12 @@ const AddMovie = () => {
                                 initialEditType="wysiwyg"
                                 useCommandShortcut={true}
                             />
-                            <button onClick={handleSave} className="mt-3 px-4 py-2 bg-blue-500 text-white rounded">
+                            <button onClick={handleSave} className="mt-3 px-5 py-3 text-white home-btn">
                                 Save Content
                             </button>
                         </div>
                     </div>
-
             }
-
-
         </div>
     )
 }
