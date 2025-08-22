@@ -22,7 +22,8 @@ const DisplayMovie = () => {
     }
 
     return (
-        <div className="container mx-auto py-28">
+        <div className="container mx-auto py-5 add-movie-sect">
+            <h2 className="text-3xl font-semibold">Movie Details</h2>
             <div className="relative overflow-x-auto">
                 <table className="w-full text-sm text-left rtl:text-right">
                     <thead className="text-xs text-white uppercase bg-[#0F172A]">
@@ -64,12 +65,12 @@ const DisplayMovie = () => {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex gap-4">
-                                            <button onClick={() => navigate(`/edit-movie/${movie.id}`)} className="border py-2 px-7">Edit</button>
-                                            <button onClick={() => handleDelete(movie.id)} className="border py-2 px-7">Delete</button>
+                                            <button onClick={() => navigate(`/edit-movie/${movie.id}`)} className="text-green-600 text-lg"><i className="bi bi-pencil-square"></i></button>
+                                            <button onClick={() => handleDelete(movie.id)} className="text-red-600 text-lg"><i className="bi bi-trash3-fill"></i></button>
                                             <button onClick={() => {
                                                 navigate(`/description/${movie.id}`)
                                             }
-                                            } className="border py-2 px-7">View More</button>
+                                            } className="text-white py-3 px-5 form-btn font-medium text-sm  items-center justify-center">View More</button>
                                         </div>
                                     </td>
                                 </tr>

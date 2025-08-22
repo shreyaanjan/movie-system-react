@@ -4,7 +4,7 @@ const Header = () => {
     const { pathname } = useLocation();
 
     return (
-        <header className="bg-[#1B2335] absolute w-full">
+        <header className="bg-[#1B2335]">
             <div className="container mx-auto">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
                     <Link to={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">

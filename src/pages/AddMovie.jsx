@@ -36,13 +36,13 @@ const AddMovie = () => {
     };
 
     return (
-        <div className="bg-[#0F172A] add-movie-sect h-screen flex justify-center items-center">
+        <div className="bg-[#0F172A] add-movie-sect min-h-screen flex justify-center items-center p-4">
             {
                 !show ?
                     <div className="w-full lg:w-1/2 flex item-center justify-center">
-                        <div className="w-full bg-white rounded-md max-w-md p-8">
+                        <div className="w-full bg-white rounded-md max-w-md p-8 overflow-y-auto">
                             <div className="container mx-auto">
-                                <h2 className="mb-5 text-3xl font-semibold text-[#E27614]">Add A Movie</h2>
+                                <h2 className="mb-5 text-3xl font-semibold">Add A Movie</h2>
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
                                         <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900">Title</label>

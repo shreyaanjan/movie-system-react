@@ -1,6 +1,6 @@
 const Home = () => {
     return (
-        <section className="bg-[#0F172A] home-section h-screen py-16">
+        <section className="bg-[#0F172A] home-section min-h-screen py-7">
             <div className="container mx-auto">
                 <div className="py-10">
                     <h1 className="uppercase text-[#E27614] text-9xl">Victor</h1>
