@@ -40,9 +40,9 @@ const AddMovie = () => {
             {
                 !show ?
                     <div className="w-full lg:w-1/2 flex item-center justify-center">
-                        <div className="w-full bg-white rounded-md max-w-md p-8 overflow-y-auto">
+                        <div className="w-full bg-white rounded-md max-w-md p-6 sm:p-8 overflow-y-auto">
                             <div className="container mx-auto">
-                                <h2 className="mb-5 text-3xl font-semibold">Add A Movie</h2>
+                                <h2 className="mb-5 text-2xl sm:text-3xl font-semibold text-center sm:text-left">Add A Movie</h2>
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-5">
                                         <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900">Title</label>
@@ -52,8 +52,8 @@ const AddMovie = () => {
                                         <label htmlFor="url" className="block mb-2 text-sm font-medium text-gray-900">Image URL</label>
                                         <input type="text" value={input.url} onChange={handleChange} id="url" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                                         {input.url && (
-                                            <div className="w-32 pt-5">
-                                                <img src={input.url} alt="movie" />
+                                            <div className="w-24 sm:w-32 pt-4">
+                                                <img src={input.url} alt="movie" className="w-full h-auto rounded-md" />
                                             </div>
                                         )}
                                     </div>
@@ -69,12 +69,12 @@ const AddMovie = () => {
                                             <option value="Science Fiction">Science Fiction</option>
                                         </select>
                                     </div>
-                                    <div className="flex items-center justify-center gap-5">
-                                        <div>
-                                            <button type="button" onClick={() => setShow(!show)} className="text-white py-3 px-5 form-btn font-medium text-sm  items-center justify-center">Add Description</button>
+                                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+                                        <div className="w-full sm:w-auto">
+                                            <button type="button" onClick={() => setShow(!show)} className="w-full text-white py-3 px-5 form-btn font-medium text-sm">Add Description</button>
                                         </div>
-                                        <div>
-                                            <button type="submit" className="text-white py-3 px-5 form-btn font-medium text-sm items-center justify-center">
+                                        <div className="w-full sm:w-auto">
+                                            <button type="submit" className="w-full text-white py-3 px-5 form-btn font-medium text-sm">
                                                 Submit
                                             </button>
                                         </div>
