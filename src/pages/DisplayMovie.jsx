@@ -5,7 +5,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 const DisplayMovie = () => {
     const [movies, setMovies] = useState([])
     const navigate = useNavigate()
-    
+
     useEffect(() => {
         fetchMovie()
     }, [])
@@ -57,20 +57,22 @@ const DisplayMovie = () => {
                                     </td>
                                     <td className="px-3 sm:px-6 py-4">
                                         <div className="w-24 sm:w-32 h-20 sm:h-24 overflow-hidden rounded-md">
-                                            <img src={movie.url} alt="movie" className="object-cover h-full w-full" />
+                                            <img src={movie.url} alt="movie" className="object-contain h-full w-full" />
                                         </div>
                                     </td>
                                     <td className="px-3 sm:px-6 py-4">
                                         {movie.genre}
                                     </td>
                                     <td className="px-3 sm:px-6 py-4">
-                                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-                                            <button onClick={() => navigate(`/edit-movie/${movie.id}`)} className="text-green-600 text-lg"><i className="bi bi-pencil-square"></i></button>
-                                            <button onClick={() => handleDelete(movie.id)} className="text-red-600 text-lg"><i className="bi bi-trash3-fill"></i></button>
+                                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-center">
+                                            <button onClick={() => navigate(`/edit-movie/${movie.id}`)} className="text-green-600 text-base sm:text-lg p-2 rounded-md hover:bg-green-600 hover:text-white transition"><i className="bi bi-pencil-square"></i></button>
+
+                                            <button onClick={() => handleDelete(movie.id)} className="text-red-600 text-base sm:text-lg p-2 rounded-md hover:bg-red-600 hover:text-white transition"><i className="bi bi-trash3-fill"></i></button>
+                                            
                                             <button onClick={() => {
                                                 navigate(`/description/${movie.id}`)
                                             }
-                                            } className="text-white py-2 px-3 sm:py-3 sm:px-5 form-btn font-medium text-xs sm:text-sm">View More</button>
+                                            } className="text-white px-3 py-2 sm:px-4 sm:py-2 form-btn font-medium text-xs sm:text-sm rounded-md whitespace-nowrap">View More</button>
                                         </div>
                                     </td>
                                 </tr>

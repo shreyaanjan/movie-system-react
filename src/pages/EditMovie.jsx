@@ -4,6 +4,7 @@ import axios from "axios"
 import { useRef } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
+import { toast } from "react-toastify";
 
 const EditMovie = () => {
     const [input, setInput] = useState({ title: "", url: "", genre: "" })
@@ -12,7 +13,7 @@ const EditMovie = () => {
     const navigate = useNavigate();
     const { id } = useParams()
     const editorRef = useRef();
-    
+
     useEffect(() => {
         const fetchData = async () => {
             let { data } = await axios.get(`http://localhost:9000/movies/${id}`)
@@ -33,6 +34,11 @@ const EditMovie = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault()
+
+        if (input.title.trim() == "" || input.url.trim() == "" || input.genre.trim() == "") {
+            toast.error("Enter All Details Correctly !")
+            return;
+        }
 
         const editMovie = async () => {
             const value = { ...input, desc }
@@ -60,7 +66,7 @@ const EditMovie = () => {
                                         <input type="text" value={input.url} onChange={handleChange} id="url" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                                         {input.url && (
                                             <div className="w-24 sm:w-32 pt-4">
-                                                <img src={input.url} alt="movie" className="w-full h-auto rounded-md"/>
+                                                <img src={input.url} alt="movie" className="w-full h-auto rounded-md" />
                                             </div>
                                         )}
                                     </div>
@@ -82,7 +88,7 @@ const EditMovie = () => {
                                         </div>
                                         <div className="w-full sm:w-auto">
                                             <button type="submit" className="w-full text-white py-3 px-5 form-btn font-medium text-sm">
-                                                Update
+                                                Update Movie
                                             </button>
                                         </div>
                                     </div>
@@ -91,19 +97,28 @@ const EditMovie = () => {
                         </div>
                     </div>
                     :
-                    <div className="min-h-screen flex justify-center items-center">
-                        <div>
-                            <Editor
-                                ref={editorRef}
-                                previewStyle="vertical"
-                                height="400px"
-                                initialEditType="wysiwyg"
-                                useCommandShortcut={true}
-                                initialValue={input.desc}
-                            />
-                            <button type="button" onClick={handleSave} className="mt-3 px-5 py-3 text-white home-btn">
-                                Save Content
-                            </button>
+                    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+                        <div className="w-full sm:max-w-3xl">
+                            <div className="bg-white/70 rounded-lg shadow-sm p-3 sm:p-4">
+                                <div className="h-[60vh] sm:h-[50vh] md:h-[60vh] lg:h-[65vh] xl:h-[50vh] overflow-y-auto">
+                                    <Editor
+                                        ref={editorRef}
+                                        previewStyle="vertical"
+                                        height="100%"
+                                        initialEditType="wysiwyg"
+                                        useCommandShortcut={true}
+                                        initialValue={input.desc ? input.desc : ""}
+                                    />
+                                </div>
+                                <div className="flex gap-4">
+                                    <button type="button" onClick={handleSave} className="mt-3 w-full sm:w-40 sm:px-8 py-2 home-btn">
+                                        Save
+                                    </button>
+                                    <button type="button" onClick={() => setShow(false)} className="mt-3 w-full sm:w-40 sm:px-8 py-2 home-btn">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
             }

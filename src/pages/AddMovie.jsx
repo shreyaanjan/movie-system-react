@@ -4,6 +4,7 @@ import axios from "axios"
 import { useRef } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
+import { toast } from "react-toastify";
 
 const AddMovie = () => {
     const [input, setInput] = useState({ title: "", url: "", genre: "" })
@@ -25,6 +26,11 @@ const AddMovie = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        if (input.title.trim() == "" || input.url.trim() == "" || input.genre.trim() == "") {
+            toast.error("Enter All Details Correctly !")
+            return;
+        }
 
         const addMovie = async () => {
             const value = { ...input, desc, id: Date.now().toString() }
@@ -75,7 +81,7 @@ const AddMovie = () => {
                                         </div>
                                         <div className="w-full sm:w-auto">
                                             <button type="submit" className="w-full text-white py-3 px-5 form-btn font-medium text-sm">
-                                                Submit
+                                                Add Movie
                                             </button>
                                         </div>
                                     </div>
@@ -97,27 +103,17 @@ const AddMovie = () => {
                                     />
                                 </div>
                                 <div className="flex gap-4">
-                                    <button
-                                        type="button"
-                                        onClick={handleSave}
-                                        className="mt-3 w-full sm:w-auto sm:px-5 sm:py-3 py-3 text-white home-btn"
-                                    >
+                                    <button type="button" onClick={handleSave} className="mt-3 w-full sm:w-40 sm:px-8 py-2 home-btn">
                                         Save
                                     </button>
-                                    <button
-                                        type="button"
-                                        onClick={()=>setShow(false)}
-                                        className="mt-3 w-full sm:w-auto sm:px-5 sm:py-3 py-3 text-white home-btn"
-                                    >
-                                        close
+                                    <button type="button" onClick={() => setShow(false)} className="mt-3 w-full sm:w-40 sm:px-8 py-2 home-btn">
+                                        Close
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
             }
-
         </div>
     )
 }

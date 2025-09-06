@@ -5,6 +5,7 @@ import AddMovie from "./pages/AddMovie"
 import DisplayMovie from "./pages/DisplayMovie"
 import Description from "./pages/Description"
 import EditMovie from "./pages/EditMovie"
+import { ToastContainer } from "react-toastify"
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/description/:id" element={<Description />} />
                 <Route path="/edit-movie/:id" element={<EditMovie />} />
             </Routes>
+            <ToastContainer />
         </BrowserRouter>
     )
 }

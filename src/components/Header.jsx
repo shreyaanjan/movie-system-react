@@ -21,7 +21,7 @@ const Header = () => {
                                 <Link to={"/add-movie"} className={`${pathname == "/add-movie" ? "text-[#E27614]" : "text-white"}`}>Add Movie</Link>
                             </li>
                             <li>
-                                <Link to={"/display-movie"} className={`${pathname == "/display-movie" ? "text-[#E27614]" : "text-white"}`}>Display Movie</Link>
+                                <Link to={"/display-movie"} className={`${pathname == "/display-movie" || pathname.includes("/description") ? "text-[#E27614]" : "text-white"}`}>Display Movie</Link>
                             </li>
                         </ul>
                     </div>
@@ -44,7 +44,7 @@ const Header = () => {
                                     <Link to={"/add-movie"}  onClick={() => setMenu(false)}  className={`${pathname == "/add-movie" ? "text-[#E27614]" : "text-white"}`}>Add Movie</Link>
                                 </li>
                                 <li>
-                                    <Link to={"/display-movie"}  onClick={() => setMenu(false)}  className={`${pathname == "/display-movie" ? "text-[#E27614]" : "text-white"}`}>Display Movie</Link>
+                                    <Link to={"/display-movie"}  onClick={() => setMenu(false)}  className={`${pathname == "/display-movie" || pathname.includes("/description") ? "text-[#E27614]" : "text-white"}`}>Display Movie</Link>
                                 </li>
                             </ul>
                         </div>
