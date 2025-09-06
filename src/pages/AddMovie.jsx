@@ -27,7 +27,7 @@ const AddMovie = () => {
         e.preventDefault()
 
         const addMovie = async () => {
-            const value = { ...input, desc, id: Date.now().toString()}
+            const value = { ...input, desc, id: Date.now().toString() }
             await axios.post("http://localhost:9000/movies", value)
         }
 
@@ -36,7 +36,7 @@ const AddMovie = () => {
     };
 
     return (
-        <div className="bg-[#0F172A] add-movie-sect min-h-screen flex justify-center items-center p-4">
+        <div className="bg-[#0F172A] add-movie-sect min-h-screen sm:flex justify-center items-center sm:p-4">
             {
                 !show ?
                     <div className="w-full lg:w-1/2 flex item-center justify-center">
@@ -84,21 +84,40 @@ const AddMovie = () => {
                         </div>
                     </div>
                     :
-                    <div className="min-h-screen flex justify-center items-center">
-                        <div>
-                            <Editor
-                                ref={editorRef}
-                                previewStyle="vertical"
-                                height="400px"
-                                initialEditType="wysiwyg"
-                                useCommandShortcut={true}
-                            />
-                            <button type="button" onClick={handleSave} className="mt-3 px-5 py-3 text-white home-btn">
-                                Save Content
-                            </button>
+                    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+                        <div className="w-full sm:max-w-3xl">
+                            <div className="bg-white/70 rounded-lg shadow-sm p-3 sm:p-4">
+                                <div className="h-[60vh] sm:h-[50vh] md:h-[60vh] lg:h-[65vh] xl:h-[50vh] overflow-y-auto">
+                                    <Editor
+                                        ref={editorRef}
+                                        previewStyle="vertical"
+                                        height="100%"
+                                        initialEditType="wysiwyg"
+                                        useCommandShortcut={true}
+                                    />
+                                </div>
+                                <div className="flex gap-4">
+                                    <button
+                                        type="button"
+                                        onClick={handleSave}
+                                        className="mt-3 w-full sm:w-auto sm:px-5 sm:py-3 py-3 text-white home-btn"
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={()=>setShow(false)}
+                                        className="mt-3 w-full sm:w-auto sm:px-5 sm:py-3 py-3 text-white home-btn"
+                                    >
+                                        close
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
             }
+
         </div>
     )
 }
